@@ -26,7 +26,7 @@ Você pode começar a editar a página modificando `app/page.tsx`. A página é 
 
 ### Sem Docker
 
-Primeiro, execute o servidor de desenvolvimento:
+Execute o servidor de desenvolvimento:
 
 ```bash
 npm run dev
@@ -35,6 +35,8 @@ yarn dev
 # ou
 pnpm dev
 ```
+
+Abra [http://localhost:3000](http://localhost:3000) no seu navegador para ver o resultado.
 
 ---
 
