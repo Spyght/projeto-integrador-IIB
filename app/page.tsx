@@ -29,7 +29,7 @@ export default function Home() {
   return (
     <main>
       <h1 className='mt-8 text-5xl font-semibold text-center'>Projeto Integrador</h1>
-      <h2 className='mt-3 text-green-600 font-medium text-lg text-center'>Natureza</h2>
+      <h2 className='mt-4 text-green-600 font-medium text-lg text-center'>Natureza</h2>
       <div className='mt-8'>
         <Gallery initState={false} images={images} widths={widths} ratios={ratios} />
       </div>

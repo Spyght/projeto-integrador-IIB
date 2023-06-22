@@ -15,45 +15,19 @@ RUN \
 	else echo "Lockfile não encontrado." && exit 1; \
 	fi
 
-
-# Reconstruir o código-fonte apenas quando necessário
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-
 # O Next.js coleta dados de telemetria completamente anônimos sobre o uso geral.
 # Saiba mais aqui: https://nextjs.org/telemetry
 # Descomente a linha a seguir caso queira desabilitar a telemetria durante a compilação.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN yarn build
-
-# Se estiver usando o npm, comente a seção acima e use a abaixo em seu lugar
-# RUN npm run build
-
-# Imagem de produção, copie todos os arquivos e execute o Next.js
 FROM base AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
 # Descomente a linha a seguir caso queira desabilitar a telemetria durante a execução.
 ENV NEXT_TELEMETRY_DISABLED 1
-
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
-COPY --from=builder /app/public ./public
-
-# Aproveite automaticamente os rastreamentos de saída para reduzir o tamanho da imagem
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
 
 EXPOSE 3000
 
 ENV PORT 3000
 
-CMD ["node", "server.js"]
+CMD ["yarn", "dev"]

@@ -1,0 +1,10 @@
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: dev.Dockerfile
+    ports:
+      - "${PORTA}:3000"
+    volumes:
+      - .:/app
+      
